@@ -65,6 +65,19 @@ aside .card .scroll{padding:.35rem .35rem .5rem}
 aside table{font-size:.88rem}
 aside th,aside td{padding:.3rem .5rem}
 .note{color:var(--muted);font-size:.95rem;margin:0 0 1rem}
+.layout>section{min-width:0}
+.cheat{border:1px solid var(--line);border-radius:6px;padding:.25rem 1rem .75rem;margin:0 0 1.5rem;background:var(--surface)}
+.cheat summary{font-weight:600;cursor:pointer;padding:.5rem 0}
+.cheat p{margin:.5rem 0}
+.cheat ul{margin:.5rem 0;padding-left:1.2rem}
+.cheat li{margin:.3rem 0}
+.cheat pre{margin:.5rem 0;padding:.6rem .8rem;background:var(--code-bg);border-radius:4px;overflow-x:auto}
+.cheat code{font-family:"Source Code Pro","Courier New",monospace;font-size:.9rem}
+.more{margin-top:2.5rem}
+.resources{margin:0;padding-left:1.2rem}
+.resources li{margin:.45rem 0;max-width:38rem}
+a{color:var(--accent);text-underline-offset:2px}
+a:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:2px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
@@ -83,6 +96,25 @@ aside th,aside td{padding:.3rem .5rem}
       </ol>
       <p class="stretch">Stretch: Which titles has P101 checked out? (Hint: JOIN)</p>
 
+      <details class="cheat" open>
+        <summary>SQL cheat sheet</summary>
+        <p>The basic pattern. Clauses always go in this order, and the query ends with a semicolon:</p>
+<pre><code>SELECT columns
+FROM table
+WHERE condition
+ORDER BY column;</code></pre>
+        <ul>
+          <li><code>SELECT *</code> means every column.</li>
+          <li>Text values go in single quotes: <code>WHERE Title = 'Kindred'</code>. Numbers don’t: <code>WHERE Barcode = 3101</code>.</li>
+          <li>Sort A to Z with <code>ORDER BY Title</code>, or Z to A with <code>ORDER BY Title DESC</code>.</li>
+          <li>Count rows instead of listing them: <code>SELECT COUNT(*) FROM ITEM;</code></li>
+        </ul>
+        <p>To combine two tables, JOIN them on the column they share:</p>
+<pre><code>SELECT PATRON.PatronName, BRANCH.BranchPhone
+FROM PATRON JOIN BRANCH
+  ON PATRON.HomeBranch = BRANCH.BranchName;</code></pre>
+      </details>
+
       <label for="sql">Your query</label>
       <textarea id="sql" spellcheck="false" autocapitalize="off" autocomplete="off" aria-describedby="sql-hint">SELECT * FROM PATRON;</textarea>
       <div class="actions">
@@ -93,6 +125,15 @@ aside th,aside td{padding:.3rem .5rem}
 
       <h2 id="r-head">Results</h2>
       <div id="result" role="status" aria-live="polite" aria-labelledby="r-head"><p class="msg">Loading the tables…</p></div>
+
+      <section class="more" aria-labelledby="more-head">
+        <h2 id="more-head">Keep practicing</h2>
+        <ul class="resources">
+          <li><a href="https://librarycarpentry.org/lc-sql/">Library Carpentry: SQL</a>: free lessons written for library workers, using a sample of journal article data. It uses SQLite, the same database this page runs on.</li>
+          <li><a href="https://sqlbolt.com/">SQLBolt</a>: short interactive lessons with exercises you run in your browser.</li>
+          <li><a href="https://www.w3schools.com/sql/">W3Schools SQL Tutorial</a>: a quick reference for each command, with examples you can try.</li>
+        </ul>
+      </section>
     </section>
 
     <aside aria-labelledby="t-head">
